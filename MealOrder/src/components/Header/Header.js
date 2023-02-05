@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../UI/Modal";
 import classes from "./Header.module.css";
-import Button from "./Button";
+import Button from "../UI/Button";
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const closeModal = () => {

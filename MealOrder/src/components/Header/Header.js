@@ -4,12 +4,15 @@ import React, { useState, useEffect } from "react";
 import Cart from "../Cart/Cart";
 import classes from "./Header.module.css";
 import Button from "../UI/Button";
+
+const calcAmount = (props) => {
+  let result = 0;
+  props.map((el) => (result += el.amount));
+  return result;
+};
 const Header = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [cartInfos, setCartInfos] = useState({
-    totalValues: 0,
-    totalAmount: 0,
-  });
+  const [cartInfos, setCartInfos] = useState(() => calcAmount(props.orderList));
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -17,12 +20,12 @@ const Header = (props) => {
     setModalOpen(true);
   };
 
-  // useEffect(() => {
-  //   if (props.orderList.length > 0) {
-  //     console.log(props.order);
-  //     // setCartInfos(() => {});
-  //   }
-  // }, [props.orderList]);
+  useEffect(() => {
+    setCartInfos(calcAmount(props.orderList));
+    //   if (props.orderList.length > 0) {
+    //     console.log(props.order);
+    //     // setCartInfos(() => {});
+  }, [props.orderList]);
 
   return (
     <div className={classes.Header}>
@@ -39,7 +42,7 @@ const Header = (props) => {
         <div className={classes.cart_buttons}>
           <FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
           <p className={classes.cart_button_title}>Your Cart</p>
-          <p className={classes.cart_button_amount}>0</p>
+          <p className={classes.cart_button_amount}>{cartInfos}</p>
         </div>
       </Button>
     </div>

@@ -1,15 +1,29 @@
+import { useState, useEffect } from "react";
 import classes from "./Cart.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
+const calc = (props) => {
+  let result = 0;
+  props.orderList.map((el) => {
+    result += el.amount * el.price;
+  });
+  return result.toFixed(2);
+};
 const Cart = (props) => {
+  const [totalPrice, setTotalPrice] = useState(() => calc(props));
+  useEffect(() => {
+    setTotalPrice(() => {
+      return calc(props);
+    });
+  }, [props.orderList]);
   return (
     <Modal>
       <div className={classes.cart_backdrop}>
         <Card className={classes.cart_total_frame}>
           <div className={classes.cart_frame}>
             <ul className={classes.cart_list_frame}>
-              {props.orderList ? (
+              {props.orderList.length > 0 ? (
                 props.orderList.map((el) => {
                   return (
                     <li className={classes.cart_list_item_frame} key={el.id}>
@@ -42,7 +56,7 @@ const Cart = (props) => {
           </div>
           <div className={classes.cart_amount_title}>
             <h2>Total Amount</h2>
-            <h2>$</h2>
+            <h2>${totalPrice}</h2>
           </div>
           <div className={classes.cart_button_frame}>
             <Button

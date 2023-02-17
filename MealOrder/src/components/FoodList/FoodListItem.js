@@ -1,31 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../UI/Button";
 import classes from "./FoodListItem.module.css";
 const FoodListItem = (props) => {
-  //   console.log(props);
+  const [selectItem, setSelectItem] = useState(props.foodItem);
+  const [itemAmount, setItemAmount] = useState(1);
+
+  const addItemHandler = (e) => {
+    e.preventDefault();
+    return props.orderListHandler({ ...selectItem, amount: itemAmount });
+  };
+  const selectItemHandler = (e) => {
+    console.log(e.target.value);
+    setItemAmount(+e.target.value);
+  };
   return (
     <>
-      <div className={classes.food_list_item_frame}>
+      <article className={classes.food_list_item_frame}>
         <div>
           <h1 className={classes.food_list_item_title}>
             {props.foodItem.title}
           </h1>
-          <p className={classes.food_list_item_disc}>{props.foodItem.disc}</p>
+          <em className={classes.food_list_item_disc}>{props.foodItem.disc}</em>
           <p className={classes.price}>${props.foodItem.price}</p>
         </div>
-        <div className={classes.order_box}>
+        <form
+          className={classes.order_box}
+          type="submit"
+          onSubmit={addItemHandler}
+        >
           <div className={classes.amount_box}>
             <p>Amount</p>
             <input
               type="number"
-              min="1"
-              max="10"
+              defaultValue={itemAmount}
+              min={1}
+              max={5}
+              onChange={selectItemHandler}
               className={classes.amount_box_input}
             />
           </div>
           <Button className={classes.food_list_item_button}>+Add</Button>
-        </div>
-      </div>
+        </form>
+      </article>
     </>
   );
 };

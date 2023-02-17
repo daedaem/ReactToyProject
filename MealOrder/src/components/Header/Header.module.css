@@ -4,8 +4,10 @@
   align-items: center;
   padding: 0rem 10%;
   color: white;
+
   background-color: #7f2607;
 }
+
 .modal_Button {
   padding: 0rem 3rem;
   border-radius: 15px;
@@ -26,4 +28,16 @@
   background-color: #7f2607;
   padding: 0.5rem 1rem;
   border-radius: 40%;
+}
+
+.header_main_image {
+  width: 100%;
+  height: 40vh;
+  overflow: hidden;
+}
+.header_image {
+  width: 110%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }

@@ -1,1 +1,13 @@
-/* 
+.Modal {
+  /* z-index: 30; */
+  z-index: 15;
+  /* width: 50%; */
+  /* min-height: 150px; */
+  /* max-height: 400px; */
+  /* background-color: white; */
+  position: relative;
+  /* top: 20vh; */
+  /* padding: 1rem; */
+  /* margin: 0rem auto; */
+  color: black;
+}

@@ -1,8 +1,7 @@
 .cart_total_frame {
   z-index: 15;
   width: 50%;
-  /* min-height: 150px; */
-  /* max-height: 400px; */
+
   background-color: white;
   position: relative;
   top: 20vh;

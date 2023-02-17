@@ -33,9 +33,7 @@ function App() {
   const [foodList, setFoodList] = useState(originFoodList);
   const [orderList, setOrderList] = useState([]);
 
-  useEffect(() => {
-    console.log(orderList);
-  }, [orderList]);
+  // useEffect(() => {}, [orderList]);
 
   const orderListHandler = (newData) => {
     setOrderList((prev) => {
@@ -54,7 +52,7 @@ function App() {
   };
   return (
     <>
-      <Header></Header>
+      <Header orderList={orderList}></Header>
       <Banner></Banner>
       <FoodList
         orderListHandler={orderListHandler}

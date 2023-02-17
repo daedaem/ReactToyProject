@@ -1,7 +1,8 @@
 .Banner {
   background-color: rgb(40, 40, 40);
   color: white;
-  width: 60%;
+  width: 48%;
   text-align: center;
   margin-top: 5rem;
+  padding: 0.1rem 0.5rem;
 }

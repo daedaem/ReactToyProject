@@ -10,7 +10,6 @@ const FoodListItem = (props) => {
     return props.orderListHandler({ ...selectItem, amount: itemAmount });
   };
   const selectItemHandler = (e) => {
-    console.log(e.target.value);
     setItemAmount(+e.target.value);
   };
   return (

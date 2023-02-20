@@ -45,4 +45,8 @@
   font-size: 1rem;
   padding: 0.5rem 0rem;
   background-color: #7f2607;
+  border: 1px transparent;
+
+  /* background-color: #431301; */
+  color: white;
 }

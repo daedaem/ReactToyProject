@@ -11,6 +11,9 @@
 .modal_Button {
   padding: 0rem 3rem;
   border-radius: 15px;
+  background-color: #431301;
+  color: white;
+  border: 1px transparent;
 }
 .cart_buttons {
   display: flex;
@@ -23,6 +26,7 @@
   /* padding: 0rem 0.5rem; */
   margin: 0rem 1rem 0rem 0.5rem;
   font-weight: bold;
+  font-size: 1rem;
 }
 .cart_button_amount {
   background-color: #7f2607;

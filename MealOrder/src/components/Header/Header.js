@@ -37,6 +37,7 @@ const Header = (props) => {
             orderList={props.orderList}
             onClose={closeModal}
             onOpen={openModal}
+            orderListHandler={props.orderListHandler}
           />
         )}
         <Button className={classes.modal_Button} onClick={openModal}>

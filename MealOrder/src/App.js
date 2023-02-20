@@ -36,23 +36,50 @@ function App() {
   // useEffect(() => {}, [orderList]);
 
   const orderListHandler = (newData) => {
+    console.log(newData);
     setOrderList((prev) => {
+      // let newarr = prev.filter((el) => {
+      //   if (el.id === newData.id && el["amount"] + newData.amount >= 0) {
+      //     return (el["amount"] += newData.amount);
+      //   }
+      // });
+      // console.log(newarr);
       if (
         prev.find((el) => {
-          if (el.id === newData.id) {
+          if (el.id === newData.id && el["amount"] + newData.amount >= 0) {
             return (el["amount"] += newData.amount);
-          }
+          } else;
         })
       ) {
         return [...prev];
       } else {
         return [...prev, newData];
       }
+      // prev.filter((value, idx) => {
+      //   // console.log(value);
+      //   if (value.id == newData.id && prev["amount"] + newData.amount >= 0) {
+      //     return (prev["amount"] += newData.amount);
+      //   } else return [];
+      // });
+      // if (
+      //   prev.find((el) => {
+      //     if (el.id === newData.id && el["amount"] + newData.amount >= 0) {
+      //       return (el["amount"] += newData.amount);
+      //     } else;
+      //   })
+      // ) {
+      //   return [...prev];
+      // } else {
+      //   return [...prev, newData];
+      // }
     });
   };
   return (
     <>
-      <Header orderList={orderList}></Header>
+      <Header
+        orderList={orderList}
+        orderListHandler={orderListHandler}
+      ></Header>
       <Banner></Banner>
       <FoodList
         orderListHandler={orderListHandler}

@@ -3,6 +3,7 @@ import classes from "./Cart.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
+import CartList from "./CartList";
 const calc = (props) => {
   let result = 0;
   props.orderList.map((el) => {
@@ -12,11 +13,13 @@ const calc = (props) => {
 };
 const Cart = (props) => {
   const [totalPrice, setTotalPrice] = useState(() => calc(props));
+
   useEffect(() => {
     setTotalPrice(() => {
       return calc(props);
     });
   }, [props.orderList]);
+
   return (
     <Modal>
       <div className={classes.cart_backdrop}>
@@ -24,33 +27,21 @@ const Cart = (props) => {
           <div className={classes.cart_frame}>
             <ul className={classes.cart_list_frame}>
               {props.orderList.length > 0 ? (
-                props.orderList.map((el) => {
+                props.orderList.map((item) => {
                   return (
-                    <li className={classes.cart_list_item_frame} key={el.id}>
-                      <h1 className={classes.cart_title}>{el.title}</h1>
-                      <div className={classes.cart_list_item_amount_button}>
-                        <div className={classes.cart_list_item_price_amount}>
-                          <p className={classes.cart_list_item_price}>
-                            ${el.price}
-                          </p>
-                          <div className={classes.cart_item_amount}>
-                            x {el.amount}
-                          </div>
-                        </div>
-                        <div>
-                          <Button className={classes.cart_item_amount_buttons}>
-                            -
-                          </Button>
-                          <Button className={classes.cart_item_amount_buttons}>
-                            +
-                          </Button>
-                        </div>
-                      </div>
-                    </li>
+                    <CartList
+                      key={item.id}
+                      orderListHandler={props.orderListHandler}
+                      orderList={item}
+                    ></CartList>
                   );
                 })
               ) : (
-                <div>없습니다.</div>
+                <ul className={classes.cart_list_frame}>
+                  <h1 className={classes.cart_list_noitem}>
+                    There is no Item.
+                  </h1>
+                </ul>
               )}
             </ul>
           </div>
@@ -65,12 +56,14 @@ const Cart = (props) => {
             >
               Close
             </Button>
-            <Button
-              className={classes.cart_button_order}
-              onClick={() => console.log("ordering")}
-            >
-              Order
-            </Button>
+            {props.orderList.length > 0 && (
+              <Button
+                className={classes.cart_button_order}
+                onClick={() => console.log("ordering")}
+              >
+                Order
+              </Button>
+            )}
           </div>
         </Card>
       </div>

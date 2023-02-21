@@ -37,40 +37,22 @@ function App() {
     console.log(newData);
 
     setOrderList((prev) => {
-      const newarr = prev.map((el) => {
+      prev = prev.map((el) => {
         if (el.id == newData.id) {
           el["amount"] = newData.amount;
           return el;
         }
         return el;
       });
-      // console.log(prev, newarr);
-      console.log(newarr, orderList);
-      return [...newarr];
-      // console.log("이전", prev);
-      // console.log(orderList);
-      //   if (
-      //     prev.find((el))
-      //     prev.map((el) => {
-      //       if (el.id == newData.id) {
-      //         return (el.amount = newData.amount);
-      //       }
-      //       // return el;
-      //     })
-      //     // console.log(prev);
-      //   ) {
-      //     // console.log("이후", prev);
-      //     return prev;
-      //   }
-      //   // console.log(prev, newData);
-      // });
+      prev = prev.filter((el) => {
+        return el.amount > 0;
+      });
+      return [...prev];
     });
   };
-  // useEffect(() => {}, [orderList]);
 
   const orderListHandler = (newData) => {
     setOrderList((prev) => {
-      // console.log("prev: ", prev, "newData: ", newData);
       let newArr = [];
       if (
         prev.find((el) => {

@@ -5,9 +5,14 @@ import Cart from "../Cart/Cart";
 import classes from "./Header.module.css";
 import Button from "../UI/Button";
 import headerImage from "../../assets/meals.jpg";
-const calcAmount = (props) => {
+const calcAmount = (data) => {
   let result = 0;
-  props.map((el) => (result += el.amount));
+  if (data) {
+    data.map((el) => {
+      result += el.amount;
+    });
+  }
+
   return result;
 };
 const Header = (props) => {
@@ -37,7 +42,7 @@ const Header = (props) => {
             orderList={props.orderList}
             onClose={closeModal}
             onOpen={openModal}
-            orderListHandler={props.orderListHandler}
+            cartAmountHandler={props.cartAmountHandler}
           />
         )}
         <Button className={classes.modal_Button} onClick={openModal}>

@@ -18,7 +18,7 @@ const Cart = (props) => {
     setTotalPrice(() => {
       return calc(props);
     });
-  }, [props.orderList]);
+  }, [props]);
 
   return (
     <Modal>
@@ -31,7 +31,7 @@ const Cart = (props) => {
                   return (
                     <CartList
                       key={item.id}
-                      orderListHandler={props.orderListHandler}
+                      cartAmountHandler={props.cartAmountHandler}
                       orderList={item}
                     ></CartList>
                   );

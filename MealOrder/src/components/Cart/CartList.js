@@ -1,25 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import classes from "./CartList.module.css";
 const CartList = (props) => {
-  const [selectItem, setSelectItem] = useState(props.orderList);
-  const [itemAmount, setItemAmount] = useState(0);
+  const [selectItem, setSelectItem] = useState(() => props.orderList);
+  const [cartItemAmount, setCartItemAmount] = useState(
+    () => props.orderList.amount
+  );
 
-  const changeAmountHandler = () => {
-    // e.preventDefault();
-    // console.log(e);
-    console.log(itemAmount);
-    return props.orderListHandler({ ...selectItem, amount: itemAmount });
+  const changeAmountHandler = (e) => {
+    e.preventDefault();
+    return props.cartAmountHandler({
+      ...selectItem,
+      amount: cartItemAmount,
+    });
   };
+
+  // const changeAmountHandler = (action) => {
+  //   // e.preventDefault();
+  //   // console.log(e);
+  //   switch (action) {
+  //     case "+":
+  //       setCartItemAmount((prev) => {
+  //         return prev + 1;
+  //       });
+  //       return props.cartAmountHandler({
+  //         ...selectItem,
+  //         amount: cartItemAmount,
+  //       });
+  //     case "-":
+  //       setCartItemAmount((prev) => {
+  //         return prev - 1;
+  //       });
+  //       return props.cartAmountHandler({
+  //         ...selectItem,
+  //         amount: cartItemAmount,
+  //       });
+  //     default:
+  //       break;
+  //   }
+  // };
+
   const increaseAmountHandler = (e) => {
-    setItemAmount(1);
-    changeAmountHandler();
+    setCartItemAmount((prev) => {
+      return prev + 1;
+    });
+    // changeAmountHandler("+");
   };
   const decreaseAmountHandler = (e) => {
-    console.log(e);
-    setItemAmount(-1);
-    changeAmountHandler();
+    setCartItemAmount((prev) => {
+      return prev - 1;
+    });
   };
+  // useEffect(() => {
+  //   setCartItemAmount(() => {
+  //     return props.orderList.amount;
+  //   });
+  // }, [cartItemAmount]);
   return (
     <li className={classes.cart_list_item_frame}>
       <h1 className={classes.cart_title}>{props.orderList.title}</h1>
@@ -32,20 +68,22 @@ const CartList = (props) => {
             x {props.orderList.amount}
           </div>
         </div>
-        <div>
-          <Button
-            className={classes.cart_item_amount_buttons}
-            onClick={decreaseAmountHandler}
-          >
-            -
-          </Button>
-          <Button
-            className={classes.cart_item_amount_buttons}
-            onClick={increaseAmountHandler}
-          >
-            +
-          </Button>
-        </div>
+        <form type="submit" onSubmit={changeAmountHandler}>
+          <div>
+            <Button
+              className={classes.cart_item_amount_buttons}
+              onClick={decreaseAmountHandler}
+            >
+              -
+            </Button>
+            <Button
+              className={classes.cart_item_amount_buttons}
+              onClick={increaseAmountHandler}
+            >
+              +
+            </Button>
+          </div>
+        </form>
       </div>
     </li>
   );

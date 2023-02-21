@@ -21,52 +21,45 @@ const Cart = (props) => {
   }, [props]);
 
   return (
-    <Modal>
-      <div className={classes.cart_backdrop}>
-        <Card className={classes.cart_total_frame}>
-          <div className={classes.cart_frame}>
-            <ul className={classes.cart_list_frame}>
-              {props.orderList.length > 0 ? (
-                props.orderList.map((item) => {
-                  return (
-                    <CartList
-                      key={item.id}
-                      cartAmountHandler={props.cartAmountHandler}
-                      orderList={item}
-                    ></CartList>
-                  );
-                })
-              ) : (
-                <ul className={classes.cart_list_frame}>
-                  <h1 className={classes.cart_list_noitem}>
-                    There is no Item.
-                  </h1>
-                </ul>
-              )}
-            </ul>
-          </div>
-          <div className={classes.cart_amount_title}>
-            <h2>Total Amount</h2>
-            <h2>${totalPrice}</h2>
-          </div>
-          <div className={classes.cart_button_frame}>
-            <Button
-              className={classes.cart_button_close}
-              onClick={props.onClose}
-            >
-              Close
-            </Button>
-            {props.orderList.length > 0 && (
-              <Button
-                className={classes.cart_button_order}
-                onClick={() => console.log("ordering")}
-              >
-                Order
-              </Button>
+    <Modal onClose={props.onClose}>
+      <Card className={classes.cart_total_frame}>
+        <div className={classes.cart_frame}>
+          <ul className={classes.cart_list_frame}>
+            {props.orderList.length > 0 ? (
+              props.orderList.map((item) => {
+                return (
+                  <CartList
+                    key={item.id}
+                    cartAmountHandler={props.cartAmountHandler}
+                    orderList={item}
+                  ></CartList>
+                );
+              })
+            ) : (
+              <ul className={classes.cart_list_frame}>
+                <h1 className={classes.cart_list_noitem}>There is no Item.</h1>
+              </ul>
             )}
-          </div>
-        </Card>
-      </div>
+          </ul>
+        </div>
+        <div className={classes.cart_amount_title}>
+          <h2>Total Amount</h2>
+          <h2>${totalPrice}</h2>
+        </div>
+        <div className={classes.cart_button_frame}>
+          <Button className={classes.cart_button_close} onClick={props.onClose}>
+            Close
+          </Button>
+          {props.orderList.length > 0 && (
+            <Button
+              className={classes.cart_button_order}
+              onClick={() => console.log("ordering")}
+            >
+              Order
+            </Button>
+          )}
+        </div>
+      </Card>
     </Modal>
   );
 };

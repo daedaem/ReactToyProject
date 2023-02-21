@@ -27,9 +27,6 @@ const Header = (props) => {
 
   useEffect(() => {
     setCartInfos(calcAmount(props.orderList));
-    //   if (props.orderList.length > 0) {
-    //     console.log(props.order);
-    //     // setCartInfos(() => {});
   }, [props.orderList]);
 
   return (

@@ -15,47 +15,17 @@ const CartList = (props) => {
     });
   };
 
-  // const changeAmountHandler = (action) => {
-  //   // e.preventDefault();
-  //   // console.log(e);
-  //   switch (action) {
-  //     case "+":
-  //       setCartItemAmount((prev) => {
-  //         return prev + 1;
-  //       });
-  //       return props.cartAmountHandler({
-  //         ...selectItem,
-  //         amount: cartItemAmount,
-  //       });
-  //     case "-":
-  //       setCartItemAmount((prev) => {
-  //         return prev - 1;
-  //       });
-  //       return props.cartAmountHandler({
-  //         ...selectItem,
-  //         amount: cartItemAmount,
-  //       });
-  //     default:
-  //       break;
-  //   }
-  // };
-
   const increaseAmountHandler = (e) => {
     setCartItemAmount((prev) => {
       return prev + 1;
     });
-    // changeAmountHandler("+");
   };
   const decreaseAmountHandler = (e) => {
     setCartItemAmount((prev) => {
       return prev - 1;
     });
   };
-  // useEffect(() => {
-  //   setCartItemAmount(() => {
-  //     return props.orderList.amount;
-  //   });
-  // }, [cartItemAmount]);
+
   return (
     <li className={classes.cart_list_item_frame}>
       <h1 className={classes.cart_title}>{props.orderList.title}</h1>

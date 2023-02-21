@@ -34,8 +34,6 @@ function App() {
   const [orderList, setOrderList] = useState([]);
 
   const cartAmountHandler = (newData) => {
-    console.log(newData);
-
     setOrderList((prev) => {
       prev = prev.map((el) => {
         if (el.id == newData.id) {

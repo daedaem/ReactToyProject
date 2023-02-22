@@ -1,10 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import React, { useState, useEffect } from "react";
 import Cart from "../Cart/Cart";
 import classes from "./Header.module.css";
-import Button from "../UI/Button";
 import headerImage from "../../assets/meals.jpg";
+import CartButton from "../Cart/CartButton";
 const calcAmount = (data) => {
   let result = 0;
   if (data) {
@@ -42,13 +40,9 @@ const Header = (props) => {
             cartAmountHandler={props.cartAmountHandler}
           />
         )}
-        <Button className={classes.modal_Button} onClick={openModal}>
-          <div className={classes.cart_buttons}>
-            <FontAwesomeIcon icon="fa-solid fa-cart-shopping" />
-            <p className={classes.cart_button_title}>Your Cart</p>
-            <p className={classes.cart_button_amount}>{cartInfos}</p>
-          </div>
-        </Button>
+        <CartButton onClick={openModal} cartInfos={cartInfos}>
+          Your Cart
+        </CartButton>
       </header>
       <div className={classes.header_main_image}>
         <img className={classes.header_image} src={headerImage} alt="" />

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import classes from "./CartList.module.css";
 const CartList = (props) => {
-  const [selectItem, setSelectItem] = useState(() => props.orderList);
   const [cartItemAmount, setCartItemAmount] = useState(
     () => props.orderList.amount
   );
@@ -10,7 +9,7 @@ const CartList = (props) => {
   const changeAmountHandler = (e) => {
     e.preventDefault();
     return props.cartAmountHandler({
-      ...selectItem,
+      ...props.orderList,
       amount: cartItemAmount,
     });
   };

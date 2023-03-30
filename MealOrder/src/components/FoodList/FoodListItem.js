@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Button from "../UI/Button";
 import classes from "./FoodListItem.module.css";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
+
 const FoodListItem = (props) => {
+  const dispatch = useDispatch();
   const [selectItem, setSelectItem] = useState(props.foodItem);
   const [itemAmount, setItemAmount] = useState(1);
 
   const addItemHandler = (e) => {
     e.preventDefault();
-    return props.orderListHandler({ ...selectItem, amount: itemAmount });
+    dispatch(cartActions.addItem({ ...selectItem, amount: itemAmount }));
   };
   const selectItemHandler = (e) => {
     setItemAmount(+e.target.value);

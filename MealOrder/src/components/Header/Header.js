@@ -37,7 +37,7 @@ const Header = (props) => {
             orderList={props.orderList}
             onClose={closeModal}
             onOpen={openModal}
-            cartAmountHandler={props.cartAmountHandler}
+            // cartAmountHandler={props.cartAmountHandler}
           />
         )}
         <CartButton onClick={openModal} cartInfos={cartInfos}>

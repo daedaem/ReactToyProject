@@ -30,7 +30,7 @@ const Cart = (props) => {
                 return (
                   <CartList
                     key={item.id}
-                    cartAmountHandler={props.cartAmountHandler}
+                    // cartAmountHandler={props.cartAmountHandler}
                     orderList={item}
                   ></CartList>
                 );

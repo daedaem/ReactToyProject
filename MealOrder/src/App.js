@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "./components/Header/Header";
 import Banner from "./components/Banner/Banner";
 import FoodList from "./components/FoodList/FoodList";
+import { useSelector } from "react-redux";
+import CartList from "./components/Cart/CartList";
 
 const originFoodList = [
   {
@@ -31,52 +33,36 @@ const originFoodList = [
 ];
 function App() {
   const [foodList, setFoodList] = useState(originFoodList);
-  const [orderList, setOrderList] = useState([]);
+  // const [orderList, setOrderList] = useState([]);
 
-  const cartAmountHandler = (newData) => {
-    setOrderList((prev) => {
-      prev = prev.map((el) => {
-        if (el.id == newData.id) {
-          el["amount"] = newData.amount;
-          return el;
-        }
-        return el;
-      });
-      prev = prev.filter((el) => {
-        return el.amount > 0;
-      });
-      return [...prev];
-    });
-  };
+  const orderList = useSelector((state) => state.cartList);
+  // const cartAmountHandler = (newData) => {
+  //   setOrderList((prev) => {
+  //     prev = prev.map((el) => {
+  //       if (el.id === newData.id) {
+  //         el["amount"] = newData.amount;
+  //         return el;
+  //       }
+  //       return el;
+  //     });
+  //     prev = prev.filter((el) => {
+  //       return el.amount > 0;
+  //     });
+  //     return [...prev];
+  //   });
+  // };
 
-  const orderListHandler = (newData) => {
-    setOrderList((prev) => {
-      let newArr = [];
-      if (
-        prev.find((el) => {
-          if (el.id === newData.id && el["amount"] + newData.amount >= 0) {
-            return (el["amount"] += newData.amount);
-          }
-        })
-      ) {
-        newArr = [...prev];
-        return newArr;
-      } else {
-        newArr = [...prev, newData];
-        return newArr;
-      }
-    });
-  };
+  // const orderListHandler = (newData) => {};
   return (
     <>
       <Header
         orderList={orderList}
-        cartAmountHandler={cartAmountHandler}
+        // cartAmountHandler={cartAmountHandler}
       ></Header>
       <Banner></Banner>
       <FoodList
         foodList={foodList}
-        orderListHandler={orderListHandler}
+        // orderListHandler={orderListHandler}
       ></FoodList>
     </>
   );

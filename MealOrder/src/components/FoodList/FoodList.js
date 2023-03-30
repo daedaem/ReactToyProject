@@ -8,7 +8,7 @@ const FoodList = (props) => {
         <FoodListItem
           key={item.id}
           foodItem={item}
-          orderListHandler={props.orderListHandler}
+          // orderListHandler={props.orderListHandler}
         ></FoodListItem>
       ))}
     </Card>

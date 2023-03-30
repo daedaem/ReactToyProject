@@ -1,58 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../UI/Button";
 import classes from "./CartList.module.css";
-const CartList = (props) => {
-  const [cartItemAmount, setCartItemAmount] = useState(
-    () => props.orderList.amount
-  );
-
-  const changeAmountHandler = (e) => {
-    e.preventDefault();
-    return props.cartAmountHandler({
-      ...props.orderList,
-      amount: cartItemAmount,
-    });
-  };
+import { useDispatch } from "react-redux";
+import { cartActions } from "./../../store/cart-slice";
+const CartList = ({ orderList }) => {
+  const dispatch = useDispatch();
 
   const increaseAmountHandler = (e) => {
-    setCartItemAmount((prev) => {
-      return prev + 1;
-    });
+    dispatch(cartActions.addItem({ ...orderList, amount: 1 }));
   };
-  const decreaseAmountHandler = (e) => {
-    setCartItemAmount((prev) => {
-      return prev - 1;
-    });
+  const decreaseAmountHandler = () => {
+    dispatch(cartActions.removeItem(orderList));
   };
 
   return (
     <li className={classes.cart_list_item_frame}>
-      <h1 className={classes.cart_title}>{props.orderList.title}</h1>
+      <h1 className={classes.cart_title}>{orderList.title}</h1>
       <div className={classes.cart_list_item_amount_button}>
         <div className={classes.cart_list_item_price_amount}>
-          <p className={classes.cart_list_item_price}>
-            ${props.orderList.price}
-          </p>
-          <div className={classes.cart_item_amount}>
-            x {props.orderList.amount}
-          </div>
+          <p className={classes.cart_list_item_price}>${orderList.price}</p>
+          <div className={classes.cart_item_amount}>x {orderList.amount}</div>
         </div>
-        <form type="submit" onSubmit={changeAmountHandler}>
-          <div>
-            <Button
-              className={classes.cart_item_amount_buttons}
-              onClick={decreaseAmountHandler}
-            >
-              -
-            </Button>
-            <Button
-              className={classes.cart_item_amount_buttons}
-              onClick={increaseAmountHandler}
-            >
-              +
-            </Button>
-          </div>
-        </form>
+        <div>
+          <Button
+            className={classes.cart_item_amount_buttons}
+            onClick={decreaseAmountHandler}
+          >
+            -
+          </Button>
+          <Button
+            className={classes.cart_item_amount_buttons}
+            onClick={increaseAmountHandler}
+          >
+            +
+          </Button>
+        </div>
       </div>
     </li>
   );

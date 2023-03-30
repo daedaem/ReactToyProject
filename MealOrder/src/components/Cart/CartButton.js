@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../UI/Button";
 import classes from "./CartButton.module.css";
 const CartButton = (props) => {
-  console.log(props);
   return (
     <Button className={classes.modal_Button} onClick={props.onClick}>
       <div className={classes.cart_buttons}>

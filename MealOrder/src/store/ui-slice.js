@@ -7,7 +7,6 @@ const uiSlice = createSlice({
   },
   reducers: {
     changeModal: (state) => {
-      console.log(state.isModal);
       state.isModal = !state.isModal;
     },
   },

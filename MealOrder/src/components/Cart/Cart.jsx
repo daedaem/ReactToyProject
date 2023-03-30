@@ -5,8 +5,8 @@ import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import CartList from "./CartList";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
-import { uiActions } from "./../../store/ui-slice";
+import { cartActions } from "../../store/cart-slice";
+import { uiActions } from "../../store/ui-slice";
 
 const Cart = (props) => {
   const orderList = useSelector((state) => state.cart.cartList);

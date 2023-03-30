@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import classes from "./Modal.module.css";
 import { useDispatch } from "react-redux";
-import { uiActions } from "./../../store/ui-slice";
+import { uiActions } from "../../store/ui-slice";
 
 const Backdrop = () => {
   const dispatch = useDispatch();

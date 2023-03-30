@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import classes from "./CartList.module.css";
 import { useDispatch } from "react-redux";
-import { cartActions } from "./../../store/cart-slice";
+import { cartActions } from "../../store/cart-slice";
 const CartList = ({ orderList }) => {
   const dispatch = useDispatch();
 

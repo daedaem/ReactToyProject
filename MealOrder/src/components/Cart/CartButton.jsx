@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../UI/Button";
 import classes from "./CartButton.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "./../../store/ui-slice";
+import { uiActions } from "../../store/ui-slice";
 
 const calcAmount = (data) => {
   let result = 0;
@@ -17,7 +17,6 @@ const calcAmount = (data) => {
 const CartButton = (props) => {
   const dispatch = useDispatch();
   const cartAmount = useSelector((state) => calcAmount(state.cart.cartList));
-  console.log(cartAmount);
   const changeModalHandler = () => {
     dispatch(uiActions.changeModal());
   };

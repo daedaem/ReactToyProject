@@ -9,7 +9,6 @@ const Header = () => {
   const orderList = useSelector((state) => state.cart.cartList);
   // const [modalOpen, setModalOpen] = useState(false);
   const modalOpen = useSelector((state) => state.ui.isModal);
-  console.log(modalOpen);
 
   return (
     <>

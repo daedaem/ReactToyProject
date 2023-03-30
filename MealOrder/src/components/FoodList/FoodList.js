@@ -5,11 +5,7 @@ const FoodList = (props) => {
   return (
     <Card className={classes.food_list_frame}>
       {props.foodList.map((item, idx) => (
-        <FoodListItem
-          key={item.id}
-          foodItem={item}
-          // orderListHandler={props.orderListHandler}
-        ></FoodListItem>
+        <FoodListItem key={item.id} foodItem={item}></FoodListItem>
       ))}
     </Card>
   );

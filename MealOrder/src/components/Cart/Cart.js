@@ -4,15 +4,31 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import CartList from "./CartList";
-const calc = (props) => {
-  let result = 0;
-  props.orderList.map((el) => {
-    result += el.amount * el.price;
-  });
-  return result.toFixed(2);
-};
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "./../../store/cart-slice";
+
 const Cart = (props) => {
+  const orderList = useSelector((state) => state.cartList);
+  const calc = (props) => {
+    let result = 0;
+    orderList.map((el) => {
+      result += el.amount * el.price;
+    });
+    return result.toFixed(2);
+  };
+
   const [totalPrice, setTotalPrice] = useState(() => calc(props));
+  const dispatch = useDispatch();
+  const orderSubmitHandler = async () => {
+    await fetch("https://meal-or-default-rtdb.firebaseio.com/orderList.json", {
+      method: "POST",
+      body: JSON.stringify({
+        ...orderList,
+      }),
+    });
+    dispatch(cartActions.clearItem());
+    alert("ordered!");
+  };
 
   useEffect(() => {
     setTotalPrice(() => {
@@ -25,15 +41,9 @@ const Cart = (props) => {
       <Card className={classes.cart_total_frame}>
         <div className={classes.cart_frame}>
           <ul className={classes.cart_list_frame}>
-            {props.orderList.length > 0 ? (
-              props.orderList.map((item) => {
-                return (
-                  <CartList
-                    key={item.id}
-                    // cartAmountHandler={props.cartAmountHandler}
-                    orderList={item}
-                  ></CartList>
-                );
+            {orderList.length > 0 ? (
+              orderList.map((item) => {
+                return <CartList key={item.id} orderList={item}></CartList>;
               })
             ) : (
               <ul className={classes.cart_list_frame}>
@@ -50,10 +60,10 @@ const Cart = (props) => {
           <Button className={classes.cart_button_close} onClick={props.onClose}>
             Close
           </Button>
-          {props.orderList.length > 0 && (
+          {orderList.length > 0 && (
             <Button
               className={classes.cart_button_order}
-              onClick={() => console.log("ordering")}
+              onClick={orderSubmitHandler}
             >
               Order
             </Button>

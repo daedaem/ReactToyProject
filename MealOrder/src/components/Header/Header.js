@@ -3,6 +3,8 @@ import Cart from "../Cart/Cart";
 import classes from "./Header.module.css";
 import headerImage from "../../assets/meals.jpg";
 import CartButton from "../Cart/CartButton";
+import { useSelector } from "react-redux";
+
 const calcAmount = (data) => {
   let result = 0;
   if (data) {
@@ -14,8 +16,10 @@ const calcAmount = (data) => {
   return result;
 };
 const Header = (props) => {
+  const orderList = useSelector((state) => state.cartList);
   const [modalOpen, setModalOpen] = useState(false);
-  const [cartInfos, setCartInfos] = useState(() => calcAmount(props.orderList));
+  const [cartInfos, setCartInfos] = useState(() => calcAmount(orderList));
+
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -24,21 +28,15 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    setCartInfos(calcAmount(props.orderList));
-  }, [props.orderList]);
+    setCartInfos(calcAmount(orderList));
+  }, [orderList]);
 
   return (
     <>
       <header className={classes.Header}>
         <h1>ReactMeals</h1>
         {modalOpen && (
-          <Cart
-            key={props.orderList.id}
-            orderList={props.orderList}
-            onClose={closeModal}
-            onOpen={openModal}
-            // cartAmountHandler={props.cartAmountHandler}
-          />
+          <Cart key={orderList.id} onClose={closeModal} onOpen={openModal} />
         )}
         <CartButton onClick={openModal} cartInfos={cartInfos}>
           Your Cart

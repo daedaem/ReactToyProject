@@ -6,14 +6,13 @@ import Modal from "../UI/Modal";
 import CartList from "./CartList";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "./../../store/cart-slice";
+import { uiActions } from "./../../store/ui-slice";
 
 const Cart = (props) => {
-  const orderList = useSelector((state) => state.cartList);
-  const calc = (props) => {
+  const orderList = useSelector((state) => state.cart.cartList);
+  const calc = () => {
     let result = 0;
-    orderList.map((el) => {
-      result += el.amount * el.price;
-    });
+    orderList.map((el) => (result += el.amount * el.price));
     return result.toFixed(2);
   };
 
@@ -23,13 +22,21 @@ const Cart = (props) => {
     await fetch("https://meal-or-default-rtdb.firebaseio.com/orderList.json", {
       method: "POST",
       body: JSON.stringify({
+        totalAmount: +orderList
+          .reduce((init, el) => {
+            return (init += el.amount * el.price);
+          }, 0)
+          .toFixed(2),
         ...orderList,
       }),
     });
     dispatch(cartActions.clearItem());
+    dispatch(uiActions.changeModal());
     alert("ordered!");
   };
-
+  const changeModalHandler = () => {
+    dispatch(uiActions.changeModal());
+  };
   useEffect(() => {
     setTotalPrice(() => {
       return calc(props);
@@ -37,7 +44,7 @@ const Cart = (props) => {
   }, [props]);
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal onClose={changeModalHandler}>
       <Card className={classes.cart_total_frame}>
         <div className={classes.cart_frame}>
           <ul className={classes.cart_list_frame}>
@@ -57,7 +64,10 @@ const Cart = (props) => {
           <h2>${totalPrice}</h2>
         </div>
         <div className={classes.cart_button_frame}>
-          <Button className={classes.cart_button_close} onClick={props.onClose}>
+          <Button
+            className={classes.cart_button_close}
+            onClick={changeModalHandler}
+          >
             Close
           </Button>
           {orderList.length > 0 && (

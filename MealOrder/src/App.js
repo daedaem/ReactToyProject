@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
 import Banner from "./components/Banner/Banner";
 import FoodList from "./components/FoodList/FoodList";
-import { useSelector } from "react-redux";
 
 function App() {
   const [foodList, setFoodList] = useState([]);

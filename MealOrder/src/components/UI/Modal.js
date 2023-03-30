@@ -1,7 +1,14 @@
 import { Fragment } from "react";
 import classes from "./Modal.module.css";
-const Backdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.onClose}></div>;
+import { useDispatch } from "react-redux";
+import { uiActions } from "./../../store/ui-slice";
+
+const Backdrop = () => {
+  const dispatch = useDispatch();
+  const changeModalHandler = () => {
+    dispatch(uiActions.changeModal());
+  };
+  return <div className={classes.backdrop} onClick={changeModalHandler}></div>;
 };
 const ModalOverlay = (props) => {
   return (
@@ -13,7 +20,7 @@ const ModalOverlay = (props) => {
 const Modal = (props) => {
   return (
     <Fragment>
-      <Backdrop onClose={props.onClose} />
+      <Backdrop />
       <ModalOverlay>{props.children}</ModalOverlay>
     </Fragment>
   );

@@ -4,6 +4,7 @@
   width: 60%;
   padding: 2rem;
   margin: 2rem auto;
+  animation: food_list_frame-appear 1s ease-out forwards;
 }
 .FoodLoading {
   text-align: center;
@@ -12,4 +13,15 @@
 .FoodError {
   text-align: center;
   color: red;
+}
+@keyframes food_list_frame-appear {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

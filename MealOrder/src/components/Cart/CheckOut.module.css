@@ -1,12 +1,11 @@
 .checkoutTotalFrame {
   margin: 1rem 0;
-  max-height: 10rem;
+  max-height: 20rem;
   overflow: auto;
 }
-/* .checkoutForms {
-  display: flex;
-  flex-direction: column;
-} */
+.checkoutForms {
+  margin: 0rem 0rem 0.5rem 0rem;
+}
 .checkoutForms label {
   font-weight: bold;
   margin-bottom: 0.25rem;
@@ -29,7 +28,7 @@
   color: #431301;
   padding: 0.5rem 1.5rem;
   margin: 0rem 0.5rem;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .checkout_button_order {
@@ -38,7 +37,7 @@
   color: white;
   padding: 0.5rem 1.5rem;
   border: 1px transparent;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .nameError {

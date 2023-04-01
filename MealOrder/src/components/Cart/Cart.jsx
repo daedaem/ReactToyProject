@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
 import CartList from "./CartList";
+import CheckOut from "./CheckOut";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
 import { uiActions } from "../../store/ui-slice";
@@ -17,8 +18,10 @@ const Cart = (props) => {
   };
 
   const [totalPrice, setTotalPrice] = useState(() => calc(props));
+  const [showOrderSheet, setShowOrderSheet] = useState(false);
   const dispatch = useDispatch();
-  const orderSubmitHandler = async () => {
+
+  const orderSubmitHandler = async (formData) => {
     await fetch("https://meal-or-default-rtdb.firebaseio.com/orderList.json", {
       method: "POST",
       body: JSON.stringify({
@@ -27,7 +30,8 @@ const Cart = (props) => {
             return (init += el.amount * el.price);
           }, 0)
           .toFixed(2),
-        ...orderList,
+        orderedItems: orderList,
+        user: formData,
       }),
     });
     dispatch(cartActions.clearItem());
@@ -37,12 +41,33 @@ const Cart = (props) => {
   const changeModalHandler = () => {
     dispatch(uiActions.changeModal());
   };
+  const orderHandler = () => {
+    setShowOrderSheet(() => true);
+  };
+  const orderCloseHandler = () => {
+    setShowOrderSheet(() => false);
+  };
   useEffect(() => {
     setTotalPrice(() => {
       return calc(props);
     });
   }, [props]);
 
+  const orderButtons = (
+    <div className={classes.cart_button_frame}>
+      <Button
+        className={classes.cart_button_close}
+        onClick={changeModalHandler}
+      >
+        Close
+      </Button>
+      {orderList.length > 0 && (
+        <Button className={classes.cart_button_order} onClick={orderHandler}>
+          Order
+        </Button>
+      )}
+    </div>
+  );
   return (
     <Modal onClose={changeModalHandler}>
       <Card className={classes.cart_total_frame}>
@@ -63,22 +88,13 @@ const Cart = (props) => {
           <h2>Total Amount</h2>
           <h2>${totalPrice}</h2>
         </div>
-        <div className={classes.cart_button_frame}>
-          <Button
-            className={classes.cart_button_close}
-            onClick={changeModalHandler}
-          >
-            Close
-          </Button>
-          {orderList.length > 0 && (
-            <Button
-              className={classes.cart_button_order}
-              onClick={orderSubmitHandler}
-            >
-              Order
-            </Button>
-          )}
-        </div>
+        {!showOrderSheet && orderButtons}
+        {showOrderSheet && (
+          <CheckOut
+            onClose={changeModalHandler}
+            onSubmit={orderSubmitHandler}
+          />
+        )}
       </Card>
     </Modal>
   );

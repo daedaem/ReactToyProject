@@ -1,6 +1,9 @@
 .cart_list_item_frame {
-  padding: 0.5rem 0rem 1rem 0rem;
+  padding: 0rem;
   border-bottom: 3px solid #431301;
+}
+.cart_list_item_frame h1 {
+  margin: 1rem 0rem 0rem 0rem;
 }
 .cart_list_item_amount_button {
   display: flex;

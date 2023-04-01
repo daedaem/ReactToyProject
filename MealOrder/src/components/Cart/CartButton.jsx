@@ -7,9 +7,7 @@ import { uiActions } from "../../store/ui-slice";
 const calcAmount = (data) => {
   let result = 0;
   if (data) {
-    data.map((el) => {
-      result += el.amount;
-    });
+    data.map((el) => (result += el.amount));
   }
 
   return result;

@@ -6,25 +6,25 @@ import { cartActions } from "../../store/cart-slice";
 
 const FoodListItem = (props) => {
   const dispatch = useDispatch();
-  const [selectItem, setSelectItem] = useState(props.foodItem);
   const [itemAmount, setItemAmount] = useState(1);
+  const selectItem = props.foodItem;
 
   const addItemHandler = (e) => {
     e.preventDefault();
     dispatch(cartActions.addItem({ ...selectItem, amount: itemAmount }));
   };
   const selectItemHandler = (e) => {
-    setItemAmount(+e.target.value);
+    setItemAmount(() => +e.target.value);
   };
   return (
     <>
       <article className={classes.food_list_item_frame}>
         <div>
           <h1 className={classes.food_list_item_title}>
-            {props.foodItem.title}
+            {props.foodItem.name}
           </h1>
           <em className={classes.food_list_item_disc}>{props.foodItem.disc}</em>
-          <p className={classes.price}>${props.foodItem.price}</p>
+          <p className={classes.price}>${props.foodItem.price.toFixed(2)}</p>
         </div>
         <form
           className={classes.order_box}

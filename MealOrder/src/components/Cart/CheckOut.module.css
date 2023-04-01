@@ -1,0 +1,55 @@
+.checkoutTotalFrame {
+  margin: 1rem 0;
+  max-height: 10rem;
+  overflow: auto;
+}
+/* .checkoutForms {
+  display: flex;
+  flex-direction: column;
+} */
+.checkoutForms label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+.checkoutForms input {
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 20rem;
+  max-width: 100%;
+}
+.checkout_buttons {
+  text-align: end;
+  padding: 1rem 0rem 0rem 0rem;
+}
+.checkout_button_close {
+  background-color: white;
+  border: 1px solid #431301;
+  color: #431301;
+  padding: 0.5rem 1.5rem;
+  margin: 0rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkout_button_order {
+  margin: 0rem 0.5rem;
+  background-color: #431301;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: 1px transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.nameError {
+  color: red;
+}
+
+.invalid label {
+  color: #ca3e51;
+}
+
+.invalid input {
+  border-color: #aa0b20;
+  background-color: #ffeff1;
+}

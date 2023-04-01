@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Button from "../UI/Button";
 import classes from "./CartList.module.css";
 import { useDispatch } from "react-redux";
@@ -15,10 +14,12 @@ const CartList = ({ orderList }) => {
 
   return (
     <li className={classes.cart_list_item_frame}>
-      <h1 className={classes.cart_title}>{orderList.title}</h1>
+      <h1>{orderList.name}</h1>
       <div className={classes.cart_list_item_amount_button}>
         <div className={classes.cart_list_item_price_amount}>
-          <p className={classes.cart_list_item_price}>${orderList.price}</p>
+          <p className={classes.cart_list_item_price}>
+            ${orderList.price.toFixed(2)}
+          </p>
           <div className={classes.cart_item_amount}>x {orderList.amount}</div>
         </div>
         <div>

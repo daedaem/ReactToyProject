@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Cart from "../Cart/Cart";
 import classes from "./Header.module.css";
 import headerImage from "../../assets/meals.jpg";
@@ -7,13 +6,12 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const orderList = useSelector((state) => state.cart.cartList);
-  // const [modalOpen, setModalOpen] = useState(false);
   const modalOpen = useSelector((state) => state.ui.isModal);
 
   return (
     <>
       <header className={classes.Header}>
-        <h1>ReactMeals</h1>
+        <h1>MealOrder</h1>
         {modalOpen && <Cart key={orderList.id} />}
         <CartButton>Your Cart</CartButton>
       </header>
